@@ -1,0 +1,13 @@
+
+	def __block_extend(self, block):	
+		extended = bitarray(48)
+		extended[0] = block[31]
+		extended[1:6] = block[0:5]
+
+		for i in range(0, 36, 6):
+			s = 6+i, e = 12+i
+			extended[s:e] = block[s - (i/3 + 3): e - (i/3 + 3)]
+		
+		extended[42:47] = block[27:32]
+		extended[47] = block[0]
+		return extended
